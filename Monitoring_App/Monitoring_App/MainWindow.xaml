@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Monitoring_App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="580" Width="537.379">
     <Grid>
-        
+        <TabControl HorizontalAlignment="Left" Height="549" VerticalAlignment="Top" Width="529">
+        <TabItem Header="Hardware">
+                <Grid Background="#FFE5E5E5">
+                    <Label x:Name="cpu_name" Content="Label" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
+                    <Label x:Name="cpu_cores" Content="Label" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Monitoring">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Window>
