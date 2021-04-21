@@ -31,6 +31,7 @@ namespace Monitoring_App
 
 			Timer();
 			CPU();
+			GPU();
         }
 
 		public void Timer()
@@ -51,6 +52,7 @@ namespace Monitoring_App
 
 		}
 
+		//Monitoring--------------------
 		public void CPU()
 		{
 			ManagementObjectSearcher cpu = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
@@ -60,8 +62,19 @@ namespace Monitoring_App
 				cpu_cores.Content = $"CPU cores: {item["ThreadCount"]}";
 				cpu_.Content = $"CPU: {item["Manufacturer"]}";
 			}
-
 		}
+		public void GPU()
+        {
+			ManagementObjectSearcher gpu = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
+            foreach (var item in gpu.Get())
+            {
+				gpu_name.Content = $"GPU: {item["Name"]}";
+				gpu_ram.Content = $"CPU: {item["AdapterRAM"]}";
+			}
+		}
+
+
+		//----------------------------
 	}	
 }
         
