@@ -27,9 +27,14 @@ namespace Monitoring_App
     public partial class MainWindow : Window
     {
 		static readonly string[] SizeSuffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
+		Computer thisComputer;
 		public MainWindow()
         {
             InitializeComponent();
+
+			thisComputer = new Computer() { CPUEnabled = true, GPUEnabled = true, MainboardEnabled = true, RAMEnabled = true, HDDEnabled = true };
+			thisComputer.Open();
+
 
 			Timer();
 			CPU();
@@ -45,7 +50,7 @@ namespace Monitoring_App
 		{
 			//Timer--------------
 			DispatcherTimer timer = new DispatcherTimer();
-			timer.Interval = TimeSpan.FromMilliseconds(1);
+			timer.Interval = TimeSpan.FromSeconds(1.5);
 			timer.Tick += timer_Tick;
 			timer.Start();
 			//-------------------
@@ -55,7 +60,7 @@ namespace Monitoring_App
 
 		void timer_Tick(object sender, EventArgs e)
 		{
-			
+			CPU_temp();
 
 		}
 
@@ -138,18 +143,59 @@ namespace Monitoring_App
 				drive_fsize.Content = $"Drive size: {SizeSuffix(Convert.ToInt64(item.AvailableFreeSpace))}";
 			}
 		}
-
+		//---------------------------
+		//Apps-----------------------
 		public void Apps()
         {
 			int x = 0;
 			ManagementObjectSearcher app = new ManagementObjectSearcher("SELECT * FROM Win32_Product");
 			foreach (var item in app.Get())
 			{
-				listbox.Items.Add(item["Name"]);
+				listbox.Items.Add($"{item["Name"]}, Version: {item["Version"]}");
 				x++;
 			}
 			app_num.Content = $"{x} apps installed";
 		}
+		//----------------------------
+		//Monitoring------------------
+		public void CPU_temp()
+        {
+			string temp = "Temp:\n";
+			string load = "Load:\n";
+			string clock = "Speed:\n";
+          
+			foreach (var hardware in thisComputer.Hardware)
+			{
+				if (hardware.HardwareType == HardwareType.CPU)
+				{
+					hardware.Update();
+
+					foreach (var sensor in hardware.Sensors)
+					{
+						if (sensor.SensorType == SensorType.Temperature)
+						{
+							temp += $"{sensor.Name} = {sensor.Value.Value}°C\r\n";
+						}
+						else if (sensor.SensorType == SensorType.Load)
+						{
+							load += $"{sensor.Name} = {Math.Round(sensor.Value.Value, 1)}%\r\n";
+						}
+						else if (sensor.SensorType == SensorType.Clock)
+						{
+							clock += $"{sensor.Name} = {Math.Round(sensor.Value.Value, 1)}Mhz\r\n";
+						}
+					}
+				}
+			}
+			cpu_temp.Content = temp;
+			cpu_load.Content = load;
+			cpu_clock.Content = clock;
+
+		}
+
+
+
+
 		//----------------------------
 	}	
 }
