@@ -35,6 +35,7 @@ namespace Monitoring_App
 			GPU();
 			RAM();
 			MothBoard();
+			Disk();
         }
 
 		public void Timer()
@@ -110,6 +111,17 @@ namespace Monitoring_App
             {
 				mboard.Content = $"Motherboard: {item["Manufacturer"]}";
             }
+		}
+
+		public void Disk()
+        {
+			ManagementObjectSearcher ram = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+            foreach (var item in ram.Get())
+            {
+				disk_model.Content = $"Disk: {item["Model"]}";
+				disk_int.Content = $"Disk interface: {item["InterfaceType"]}";
+				disk_size.Content = $"Sisk size: {SizeSuffix(Convert.ToInt64(item["Size"]))}";
+			}
 		}
 
 		//----------------------------

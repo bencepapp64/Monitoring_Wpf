@@ -23,6 +23,10 @@
                     <Label x:Name="ram_man" Content="rammanufacturer" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
                     <Label Content="Motherboard:" HorizontalAlignment="Left" Margin="10,415,0,0" VerticalAlignment="Top" Width="123" Height="35" FontSize="20" FontFamily="Impact"/>
                     <Label x:Name="mboard" Content="motherboard" HorizontalAlignment="Left" Margin="10,455,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
+                    <Label Content="Disk:" HorizontalAlignment="Left" Margin="291,10,0,0" VerticalAlignment="Top" Width="70" Height="40" FontSize="20" FontFamily="Impact"/>
+                    <Label x:Name="disk_model" Content="diskmodel" HorizontalAlignment="Left" Margin="291,50,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
+                    <Label x:Name="disk_int" Content="diskint" HorizontalAlignment="Left" Margin="291,90,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
+                    <Label x:Name="disk_size" Content="disksize" HorizontalAlignment="Left" Margin="291,130,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
                 </Grid>
 
             </TabItem>
