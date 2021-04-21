@@ -43,7 +43,7 @@ namespace Monitoring_App
 			MothBoard();
 			Disk();
 			Drives();
-			Apps();
+			//Apps();
         }
 
 		public void Timer()
@@ -107,11 +107,15 @@ namespace Monitoring_App
 		public void RAM()
         {
 			ManagementObjectSearcher ram = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMemory");
-            foreach (var item in ram.Get())
+			string ddr = "";
+			foreach (var item in ram.Get())
             {
-				ram_name.Content = $"RAM: {item["Name"]}";
-				ram_cap.Content = $"RAM size: {SizeSuffix(Convert.ToInt64(item["Capacity"]))}";
-				ram_man.Content = $"RAM Manufacturer: {item["Manufacturer"]}";
+				
+				if (Convert.ToInt32(item["MemoryType"]) == 20) ddr = $"DDR";
+				else if (Convert.ToInt32(item["MemoryType"]) == 21) ddr = $"DDR2";
+				else if (Convert.ToInt32(item["MemoryType"]) == 24) ddr = $"DDR3";
+				else if (Convert.ToInt32(item["MemoryType"]) == 26) ddr = $"DDR4";
+				ram_list.Items.Add($" {Convert.ToString(ddr)} {item["Manufacturer"]} {item["Tag"]} {SizeSuffix(Convert.ToInt64(item["Capacity"]))} {item["Speed"]} MHz");
 			}
 		}
 
@@ -140,10 +144,8 @@ namespace Monitoring_App
 			DriveInfo[] allDrives = DriveInfo.GetDrives();
             foreach (var item in allDrives)
             {
-				drive.Content = item.Name;
-				drive_format.Content = item.DriveFormat;
-				drive_size.Content = $"Drive size: {SizeSuffix(Convert.ToInt64(item.TotalSize))}";
-				drive_fsize.Content = $"Drive size: {SizeSuffix(Convert.ToInt64(item.AvailableFreeSpace))}";
+				drive.Items.Add($"{item.Name}: \r\nSize: {SizeSuffix(item.TotalSize)}, \r\nFree: {SizeSuffix(item.AvailableFreeSpace)}, \r\nFormat: {item.DriveFormat}");
+				
 			}
 		}
 		//---------------------------
