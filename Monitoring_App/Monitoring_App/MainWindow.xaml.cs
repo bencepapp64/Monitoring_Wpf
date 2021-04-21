@@ -33,6 +33,7 @@ namespace Monitoring_App
 			Timer();
 			CPU();
 			GPU();
+			RAM();
         }
 
 		public void Timer()
@@ -77,7 +78,7 @@ namespace Monitoring_App
 			{
 				cpu_name.Content = $"CPU: {item["Name"]}";
 				cpu_cores.Content = $"CPU cores: {item["ThreadCount"]}";
-				cpu_.Content = $"CPU: {item["Manufacturer"]}";
+				cpu_.Content = $"CPU Manufacturer: {item["Manufacturer"]}";
 			}
 		}
 		public void GPU()
@@ -90,6 +91,16 @@ namespace Monitoring_App
 			}
 		}
 		
+		public void RAM()
+        {
+			ManagementObjectSearcher ram = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMemory");
+            foreach (var item in ram.Get())
+            {
+				ram_name.Content = $"RAM: {item["Name"]}";
+				ram_cap.Content = $"RAM size: {SizeSuffix(Convert.ToInt64(item["Capacity"]))}";
+				ram_man.Content = $"RAM Manufacturer: {item["Manufacturer"]}";
+			}
+		}
 
 		//----------------------------
 	}	

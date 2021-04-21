@@ -17,6 +17,10 @@
                     <Label Content="GPU:" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" Width="70" Height="40" FontSize="20" FontFamily="Impact"/>
                     <Label x:Name="gpu_name" Content="gpuname" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
                     <Label x:Name="gpu_ram" Content="gpuram" HorizontalAlignment="Left" Margin="10,240,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
+                    <Label Content="RAM:" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top" Width="70" Height="40" FontSize="20" FontFamily="Impact"/>
+                    <Label x:Name="ram_name" Content="ramname" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
+                    <Label x:Name="ram_cap" Content="ramcapacity" HorizontalAlignment="Left" Margin="10,345,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
+                    <Label x:Name="ram_man" Content="rammanufacturer" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
                 </Grid>
 
             </TabItem>
