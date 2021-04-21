@@ -34,6 +34,7 @@ namespace Monitoring_App
 			CPU();
 			GPU();
 			RAM();
+			MothBoard();
         }
 
 		public void Timer()
@@ -100,6 +101,15 @@ namespace Monitoring_App
 				ram_cap.Content = $"RAM size: {SizeSuffix(Convert.ToInt64(item["Capacity"]))}";
 				ram_man.Content = $"RAM Manufacturer: {item["Manufacturer"]}";
 			}
+		}
+
+		public void MothBoard()
+        {
+			ManagementObjectSearcher ram = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+            foreach (var item in ram.Get())
+            {
+				mboard.Content = $"Motherboard: {item["Manufacturer"]}";
+            }
 		}
 
 		//----------------------------
