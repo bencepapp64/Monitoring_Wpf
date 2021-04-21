@@ -27,6 +27,7 @@ namespace Monitoring_App
     public partial class MainWindow : Window
     {
 		static readonly string[] SizeSuffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
+		List<APP> apps = new List<APP>();
 		Computer thisComputer;
 		public MainWindow()
         {
@@ -43,7 +44,7 @@ namespace Monitoring_App
 			MothBoard();
 			Disk();
 			Drives();
-			//Apps();
+			Apps();
         }
 
 		public void Timer()
@@ -135,7 +136,6 @@ namespace Monitoring_App
             {
 				disk_model.Content = $"Disk: {item["Model"]}";
 				disk_int.Content = $"Disk interface: {item["InterfaceType"]}";
-				disk_size.Content = $"Disk size: {SizeSuffix(Convert.ToInt64(item["Size"]))}";
 			}
 		}
 
@@ -156,9 +156,11 @@ namespace Monitoring_App
 			ManagementObjectSearcher app = new ManagementObjectSearcher("SELECT * FROM Win32_Product");
 			foreach (var item in app.Get())
 			{
-				listbox.Items.Add($"{item["Name"]}, Version: {item["Version"]}");
+				apps.Add(new APP() {Name = (string)item["Name"], Version = (string)item["Version"] });
+
 				x++;
 			}
+			list.ItemsSource = apps;
 			app_num.Content = $"{x} apps installed";
 		}
 		//----------------------------
@@ -256,7 +258,14 @@ namespace Monitoring_App
 			mem_load.Content = loadContent;
 		}
 		//----------------------------
+
 	}	
+
+	public class APP
+    {
+		public string Name { get; set; }
+		public string Version { get; set; }
+	}
 }
         
        
