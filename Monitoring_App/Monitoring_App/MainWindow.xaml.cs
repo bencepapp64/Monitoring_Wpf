@@ -61,6 +61,8 @@ namespace Monitoring_App
 		void timer_Tick(object sender, EventArgs e)
 		{
 			CPU_temp();
+			GPU_temp();
+
 
 		}
 
@@ -193,7 +195,39 @@ namespace Monitoring_App
 
 		}
 
+		public void GPU_temp()
+        {
+			string temp = "Temp:\n";
+			string load = "Load:\n";
+			string clock = "Speed:\n";
 
+			foreach (var hardware in thisComputer.Hardware)
+			{
+				if (hardware.HardwareType == HardwareType.GpuNvidia || hardware.HardwareType == HardwareType.GpuAti)
+				{
+					hardware.Update();
+
+					foreach (var sensor in hardware.Sensors)
+					{
+						if (sensor.SensorType == SensorType.Temperature)
+						{
+							temp += $"{sensor.Name} = {sensor.Value.Value}°C\r\n";
+						}
+						else if (sensor.SensorType == SensorType.Load)
+						{
+							load += $"{sensor.Name} = {Math.Round(sensor.Value.Value, 1)}%\r\n";
+						}
+						else if (sensor.SensorType == SensorType.Clock)
+						{
+							clock += $"{sensor.Name} = {Math.Round(sensor.Value.Value, 1)}Mhz\r\n";
+						}
+					}
+				}
+			}
+			gpu_temp.Content = temp;
+			gpu_load.Content = load;
+			gpu_clock.Content = clock;
+		}
 
 
 		//----------------------------
