@@ -41,10 +41,13 @@
                     <Label x:Name="cpu_load" Content="Label" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Height="90" Width="150"/>
                     <Label x:Name="cpu_clock" Content="Label" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Height="90" Width="150"/>
                     <Label Content="CPU:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="70" Height="40" FontSize="20" FontFamily="Impact"/>
-                    <Label Content="GPU:" HorizontalAlignment="Left" Margin="237,10,0,0" VerticalAlignment="Top" Width="70" Height="40" FontSize="20" FontFamily="Impact"/>
+                    <Label Content="GPU:" HorizontalAlignment="Left" Margin="165,10,0,0" VerticalAlignment="Top" Width="70" Height="40" FontSize="20" FontFamily="Impact"/>
                     <Label x:Name="gpu_temp" Content="Label" HorizontalAlignment="Left" Margin="165,55,0,0" VerticalAlignment="Top" Height="90" Width="150"/>
                     <Label x:Name="gpu_load" Content="Label" HorizontalAlignment="Left" Margin="165,150,0,0" VerticalAlignment="Top" Height="90" Width="150"/>
                     <Label x:Name="gpu_clock" Content="Label" HorizontalAlignment="Left" Margin="165,245,0,0" VerticalAlignment="Top" Height="90" Width="150"/>
+                    <Label x:Name="mem_load" Content="Label" HorizontalAlignment="Left" Margin="315,55,0,0" VerticalAlignment="Top" Height="90" Width="150"/>
+                    <Label Content="MEM:" HorizontalAlignment="Left" Margin="320,10,0,0" VerticalAlignment="Top" Width="70" Height="40" FontSize="20" FontFamily="Impact"/>
+                    <ProgressBar x:Name="mem_prog" HorizontalAlignment="Left" Height="113" Margin="467,10,0,0" VerticalAlignment="Top" Width="46" Orientation="Vertical"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Apps">

@@ -62,6 +62,7 @@ namespace Monitoring_App
 		{
 			CPU_temp();
 			GPU_temp();
+			MEM_temp();
 
 
 		}
@@ -229,7 +230,29 @@ namespace Monitoring_App
 			gpu_clock.Content = clock;
 		}
 
+		public void MEM_temp()
+        {
+			string loadContent = "Load:\n";
+			foreach (var hardware in thisComputer.Hardware)
+			{
+				if (hardware.HardwareType == HardwareType.RAM)
+				{
+					hardware.Update();
+					foreach (IHardware subHardware in hardware.SubHardware)
+						subHardware.Update();
 
+					foreach (var sensor in hardware.Sensors)
+					{
+						if (sensor.SensorType == SensorType.Load)
+						{
+							loadContent += $"{sensor.Name} = {Math.Round(sensor.Value.Value, 1)}%\r\n";
+							mem_prog.Value = Math.Round(sensor.Value.Value, 1);
+						}
+					}
+				}
+			}
+			mem_load.Content = loadContent;
+		}
 		//----------------------------
 	}	
 }
