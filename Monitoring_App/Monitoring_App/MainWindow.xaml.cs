@@ -38,6 +38,7 @@ namespace Monitoring_App
 			MothBoard();
 			Disk();
 			Drives();
+			Apps();
         }
 
 		public void Timer()
@@ -138,6 +139,17 @@ namespace Monitoring_App
 			}
 		}
 
+		public void Apps()
+        {
+			int x = 0;
+			ManagementObjectSearcher app = new ManagementObjectSearcher("SELECT * FROM Win32_Product");
+			foreach (var item in app.Get())
+			{
+				listbox.Items.Add(item["Name"]);
+				x++;
+			}
+			app_num.Content = $"{x} apps installed";
+		}
 		//----------------------------
 	}	
 }
