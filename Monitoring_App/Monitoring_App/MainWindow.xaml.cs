@@ -25,7 +25,8 @@ namespace Monitoring_App
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+		static readonly string[] SizeSuffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
+		public MainWindow()
         {
             InitializeComponent();
 
@@ -52,6 +53,22 @@ namespace Monitoring_App
 
 		}
 
+		static string SizeSuffix(Int64 value, int decimalPlaces = 1)
+		{
+			if (value < 0) { return "-" + SizeSuffix(-value); }
+			if (value < 0) { return "-" + SizeSuffix(-value, decimalPlaces); }
+
+			int i = 0;
+			decimal dValue = (decimal)value;
+			while (Math.Round(dValue, decimalPlaces) >= 1000)
+			{
+				dValue /= 1024;
+				i++;
+			}
+
+			return string.Format("{0:n" + decimalPlaces + "} {1}", dValue, SizeSuffixes[i]);
+		}
+
 		//Monitoring--------------------
 		public void CPU()
 		{
@@ -69,10 +86,10 @@ namespace Monitoring_App
             foreach (var item in gpu.Get())
             {
 				gpu_name.Content = $"GPU: {item["Name"]}";
-				gpu_ram.Content = $"CPU: {item["AdapterRAM"]}";
+				gpu_ram.Content = $"VRAM: {SizeSuffix(Convert.ToInt64(item["AdapterRAM"]))}";
 			}
 		}
-
+		
 
 		//----------------------------
 	}	
