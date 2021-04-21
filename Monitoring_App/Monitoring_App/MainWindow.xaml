@@ -27,6 +27,11 @@
                     <Label x:Name="disk_model" Content="diskmodel" HorizontalAlignment="Left" Margin="291,50,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
                     <Label x:Name="disk_int" Content="diskint" HorizontalAlignment="Left" Margin="291,90,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
                     <Label x:Name="disk_size" Content="disksize" HorizontalAlignment="Left" Margin="291,130,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
+                    <Label Content="Drive:" HorizontalAlignment="Left" Margin="291,165,0,0" VerticalAlignment="Top" Width="70" Height="40" FontSize="20" FontFamily="Impact"/>
+                    <Label x:Name="drive_format" Content="driveformat" HorizontalAlignment="Left" Margin="291,245,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
+                    <Label x:Name="drive_size" Content="drivesize" HorizontalAlignment="Left" Margin="291,280,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
+                    <Label x:Name="drive_fsize" Content="drivefreesize" HorizontalAlignment="Left" Margin="291,315,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
+                    <Label x:Name="drive" Content="drive" HorizontalAlignment="Left" Margin="291,210,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
                 </Grid>
 
             </TabItem>

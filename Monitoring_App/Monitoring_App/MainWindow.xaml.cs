@@ -17,6 +17,7 @@ using System.Windows.Threading;
 using System.Management;
 using OpenHardwareMonitor;
 using OpenHardwareMonitor.Hardware;
+using System.IO;
 
 namespace Monitoring_App
 {
@@ -36,6 +37,7 @@ namespace Monitoring_App
 			RAM();
 			MothBoard();
 			Disk();
+			Drives();
         }
 
 		public void Timer()
@@ -120,7 +122,19 @@ namespace Monitoring_App
             {
 				disk_model.Content = $"Disk: {item["Model"]}";
 				disk_int.Content = $"Disk interface: {item["InterfaceType"]}";
-				disk_size.Content = $"Sisk size: {SizeSuffix(Convert.ToInt64(item["Size"]))}";
+				disk_size.Content = $"Disk size: {SizeSuffix(Convert.ToInt64(item["Size"]))}";
+			}
+		}
+
+		public void Drives()
+        {
+			DriveInfo[] allDrives = DriveInfo.GetDrives();
+            foreach (var item in allDrives)
+            {
+				drive.Content = item.Name;
+				drive_format.Content = item.DriveFormat;
+				drive_size.Content = $"Drive size: {SizeSuffix(Convert.ToInt64(item.TotalSize))}";
+				drive_fsize.Content = $"Drive size: {SizeSuffix(Convert.ToInt64(item.AvailableFreeSpace))}";
 			}
 		}
 
