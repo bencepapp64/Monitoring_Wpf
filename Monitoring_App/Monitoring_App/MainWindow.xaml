@@ -42,6 +42,9 @@
                     <Label x:Name="mem_load" Content="Label" HorizontalAlignment="Left" Margin="315,55,0,0" VerticalAlignment="Top" Height="90" Width="150"/>
                     <Label Content="MEM:" HorizontalAlignment="Left" Margin="320,10,0,0" VerticalAlignment="Top" Width="70" Height="40" FontSize="20" FontFamily="Impact"/>
                     <ProgressBar x:Name="mem_prog" HorizontalAlignment="Left" Height="113" Margin="467,10,0,0" VerticalAlignment="Top" Width="46" Orientation="Vertical"/>
+                    <Label Content="HDD:" HorizontalAlignment="Left" Margin="315,145,0,0" VerticalAlignment="Top" Width="70" Height="40" FontSize="20" FontFamily="Impact"/>
+                    <Label x:Name="hdd_temp" Content="Label" HorizontalAlignment="Left" Margin="320,190,0,0" VerticalAlignment="Top" Height="90" Width="150"/>
+                    <ProgressBar x:Name="hdd_prog" HorizontalAlignment="Left" Height="113" Margin="467,150,0,0" VerticalAlignment="Top" Width="46" Orientation="Vertical"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Apps">
@@ -54,6 +57,7 @@
                             <DataGridTextColumn Header="Version" Binding="{Binding Path=Version}" Width="20*"/>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Button x:Name="save" Content="Save" HorizontalAlignment="Left" Margin="422,10,0,0" VerticalAlignment="Top" Width="91" Height="30" Click="Button_Click"/>
                 </Grid>
 
             </TabItem>

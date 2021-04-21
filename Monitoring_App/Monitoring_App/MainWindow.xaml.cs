@@ -18,6 +18,7 @@ using System.Management;
 using OpenHardwareMonitor;
 using OpenHardwareMonitor.Hardware;
 using System.IO;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Monitoring_App
 {
@@ -64,7 +65,7 @@ namespace Monitoring_App
 			CPU_temp();
 			GPU_temp();
 			MEM_temp();
-
+			HDD_temp();
 
 		}
 
@@ -236,7 +237,7 @@ namespace Monitoring_App
 
 		public void MEM_temp()
         {
-			string loadContent = "Load:\n";
+			string load = "Load:\n";
 			foreach (var hardware in thisComputer.Hardware)
 			{
 				if (hardware.HardwareType == HardwareType.RAM)
@@ -249,19 +250,65 @@ namespace Monitoring_App
 					{
 						if (sensor.SensorType == SensorType.Load)
 						{
-							loadContent += $"{sensor.Name} = {Math.Round(sensor.Value.Value, 1)}%\r\n";
+							load += $"{sensor.Name} = {Math.Round(sensor.Value.Value, 1)}%\r\n";
 							mem_prog.Value = Math.Round(sensor.Value.Value, 1);
 						}
 					}
 				}
 			}
-			mem_load.Content = loadContent;
+			mem_load.Content = load;
+		}
+
+		public void HDD_temp()
+        {
+			string temp = "Temp:\n";
+			foreach (var hardware in thisComputer.Hardware)
+			{
+				if (hardware.HardwareType == HardwareType.HDD)
+				{
+					hardware.Update();
+					foreach (var sensor in hardware.Sensors)
+					{
+						if (sensor.SensorType == SensorType.Temperature)
+						{
+							temp += $"{sensor.Name} = {sensor.Value.Value}°C\r\n";
+							hdd_prog.Value = Math.Round(sensor.Value.Value, 1);
+						}
+					}
+				}
+			}
+			hdd_temp.Content = temp;
 		}
 		//----------------------------
+		private void Button_Click(object sender, RoutedEventArgs e)
+        {
+			Excel.Application app = new Excel.Application();
+			app.DisplayAlerts = false;
+			app.Visible = false;
+			Excel.Workbook wb = app.Workbooks.Add();
+			wb.Worksheets.Add();
+			Excel._Worksheet workSheet = app.Worksheets[app.Worksheets.Count - 1];
+			workSheet.Name = "Applications";
+			workSheet.Cells[1, 1].Value = "Name:";
+			workSheet.Cells[1, 2].Value = "Version:";
+			for (int i = 0; i < apps.Count; i++)
+			{
+				workSheet.Cells[i + 2, 1].Value = apps[i].Name;
+				workSheet.Cells[i + 2, 2].Value = $"{apps[i].Version}";
+			}
+			workSheet.Columns.AutoFit();
+			wb.SaveAs($@"{AppDomain.CurrentDomain.BaseDirectory}..\..\save\infos", Excel.XlFileFormat.xlWorkbookDefault,
+			  Type.Missing, Type.Missing, Type.Missing,
+			  Type.Missing, Excel.XlSaveAsAccessMode.xlExclusive,
+			  Type.Missing, Type.Missing, Type.Missing,
+			  Type.Missing, Type.Missing);
+			wb.Close();
+		}
+       
 
-	}	
+    }
 
-	public class APP
+    public class APP
     {
 		public string Name { get; set; }
 		public string Version { get; set; }
