@@ -8,10 +8,12 @@
         Title="MainWindow" Height="580" Width="537.379">
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="549" VerticalAlignment="Top" Width="529">
-        <TabItem Header="Hardware">
+            <TabItem Header="Hardware">
                 <Grid Background="#FFE5E5E5">
-                    <Label x:Name="cpu_name" Content="Label" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
-                    <Label x:Name="cpu_cores" Content="Label" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
+                    <Label x:Name="cpu_name" Content="cpuname" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
+                    <Label x:Name="cpu_cores" Content="cpucores" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
+                    <Label Content="CPU:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="70" Height="40" FontSize="20" FontFamily="Impact"/>
+                    <Label x:Name="cpu_" Content="cpu" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Height="30" Width="200"/>
                 </Grid>
 
             </TabItem>

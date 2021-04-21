@@ -29,11 +29,11 @@ namespace Monitoring_App
         {
             InitializeComponent();
 
-			Monitoring();
-			Proc();
+			Timer();
+			CPU();
         }
 
-		public void Monitoring()
+		public void Timer()
 		{
 			//Timer--------------
 			DispatcherTimer timer = new DispatcherTimer();
@@ -51,13 +51,14 @@ namespace Monitoring_App
 
 		}
 
-		public void Proc()
+		public void CPU()
 		{
 			ManagementObjectSearcher cpu = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
 			foreach (var item in cpu.Get())
 			{
 				cpu_name.Content = $"CPU: {item["Name"]}";
 				cpu_cores.Content = $"CPU cores: {item["ThreadCount"]}";
+				cpu_.Content = $"CPU: {item["Manufacturer"]}";
 			}
 
 		}
